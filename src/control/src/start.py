@@ -19,7 +19,7 @@ def keyinput(id, moraictl:moraiCtrl):
             command = int(inpdata[0])
         else :
             print("try again")
-            continue
+            break
 
         if command == -1:
             flag = False
