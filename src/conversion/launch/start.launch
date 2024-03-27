@@ -1,0 +1,20 @@
+<launch>
+    <!-- TF Launch -->
+    <include file="$(find ssc_description)/launch/display.launch"/>
+
+    <!-- 3D Point Cloud to Laser Scan -->
+    <include file="$(find pointcloud_to_laserscan)/launch/sample_node.launch"/>
+
+    <!-- Converter Run -->
+    <node pkg="conversion" type="gps_imu_to_odom.py" name="gps_imu_to_odom"/>
+
+    <!-- DWA -->
+    <include file="$(find dwa_planner)/launch/local_planner.launch"/>
+
+    <node pkg="conversion" type="odom_frame_broadcast.py" name="odom_frame_broadcaster"/>
+    <!-- GPS TF Frame Publisher -->
+    <node pkg="conversion" type="gps_frame_broadcast2.py" name="gps_frame_broadcast2"/>
+
+    <!-- RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d /home/hanbaek2004/SSC/test.rviz"/>
+</launch>
