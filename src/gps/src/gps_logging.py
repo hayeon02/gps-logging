@@ -31,7 +31,7 @@ def gps_callback(msg):
 
     #utm value distance calculation
     distance = math.sqrt((llatitude_utm - previous_latitude)**2 + (longitude_utm - previous_longitude)**2)
-
+    
     if previous_latitude == 0 and previous_longitude == 0:
         previous_latitude = llatitude_utm
         previous_longitude = longitude_utm
@@ -47,7 +47,8 @@ def gps_callback(msg):
 
 if __name__ == '__main__':
     rospy.init_node('gps_data')
-    sub_gps = rospy.Subscriber('/gps', GPSMessage, gps_callback)
+    rospy.Subscriber('/gps', GPSMessage, map, queue_size=1)
+    rospy.Subscriber('/gps', GPSMessage, gps_callback)
     rospy.spin()
     if os.path.exists(csv_name):
         print("csv파일이 저장되었습니다.")

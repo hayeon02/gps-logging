@@ -1,6 +1,0 @@
-<launch>
-  <param name="robot_description" command="xacro '$(find ssc_description)/urdf/ssc.urdf'" />
-  <!-- Run the robot_state_publisher and use the robot_description parameter -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-
-</launch>
