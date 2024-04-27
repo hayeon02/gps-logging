@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import rospy
-from morai_msgs.msg import GPSMessage
+from sensor_msgs.msg import NavSatFix
 import pandas as pd
 import datetime
 import utm
@@ -24,7 +24,7 @@ points = []
 def map(msg):
     global gps_map
     gps_map = folium.Map(location=[msg.latitude, msg.longitude], zoom_start=20)
-    folium.Marker([msg.latitude, msg.longitude], popup="위치", icon=folium.Icon(color="blue", icon="star")).add_to(gps_map)
+    folium.Marker([msg.latitude, msg.longitude], popup=[msg.latitude, msg.longitude], icon=folium.Icon(color="blue", icon="star")).add_to(gps_map)
     gps_map.save('map.html')
     
 
@@ -53,7 +53,7 @@ def gps_callback(msg):
             rospy.loginfo(distance)
             df.loc[len(df)] = [seq, latitude, longitude, llatitude_utm, longitude_utm]
             points.append([latitude, longitude])
-            folium.Marker([latitude, longitude], popup=seq, icon=folium.Icon(color="blue", icon="star")).add_to(gps_map)
+            folium.Marker([latitude, longitude], popup=points, icon=folium.Icon(color="blue", icon="star")).add_to(gps_map)
             folium.PolyLine(locations=points, color='blue', weight=3, tooltip='polyline').add_to(gps_map)
             gps_map.save('map.html')
             previous_latitude = llatitude_utm
@@ -63,8 +63,8 @@ def gps_callback(msg):
 
 if __name__ == '__main__':
     rospy.init_node('gps_data')
-    rospy.Subscriber('/gps', GPSMessage, map, queue_size=1)
-    rospy.Subscriber('/gps', GPSMessage, gps_callback)
+    rospy.Subscriber('/ublox_gps/fix', NavSatFix, map, queue_size=1)
+    rospy.Subscriber('/ublox_gps/fix', NavSatFix, gps_callback)
     rospy.spin()
     if os.path.exists(csv_name):
         print("csv파일이 저장되었습니다.")

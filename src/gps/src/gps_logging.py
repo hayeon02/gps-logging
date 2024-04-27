@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 import rospy
-from morai_msgs.msg import GPSMessage
+from sensor_msgs.msg import NavSatFix
 import pandas as pd
 import datetime
 import utm
 import math
 import os
 
+serial_port = '/dev/ttyACM0'
 df = pd.DataFrame(columns = ['seq', 'llatitude', 'longitude', 'llatitude_utm', 'longitude_utm']) #csv colums
 
 #previous_latitude, previous_longitude reset
@@ -47,8 +48,8 @@ def gps_callback(msg):
 
 if __name__ == '__main__':
     rospy.init_node('gps_data')
-    rospy.Subscriber('/gps', GPSMessage, map, queue_size=1)
-    rospy.Subscriber('/gps', GPSMessage, gps_callback)
+    rospy.Subscriber('/ublox_gps/fix', NavSatFix, map, queue_size=1)
+    rospy.Subscriber('/ublox_gps/fix', NavSatFix, gps_callback)
     rospy.spin()
     if os.path.exists(csv_name):
         print("csv파일이 저장되었습니다.")
