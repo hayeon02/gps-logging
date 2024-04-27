@@ -1,0 +1,8 @@
+prefix=/home/yeon/SSC/devel
+
+Name: convertion
+Description: Description of convertion
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

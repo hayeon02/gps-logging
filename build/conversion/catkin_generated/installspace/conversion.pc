@@ -1,0 +1,8 @@
+prefix=/home/yeon/SSC/install
+
+Name: conversion
+Description: Description of conversion
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

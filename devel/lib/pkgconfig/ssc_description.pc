@@ -1,0 +1,8 @@
+prefix=/home/yeon/SSC/devel
+
+Name: ssc_description
+Description: Description of ssc_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

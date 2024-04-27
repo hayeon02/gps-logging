@@ -48,8 +48,13 @@ def gps_callback(msg):
 
 if __name__ == '__main__':
     rospy.init_node('gps_data')
+<<<<<<< HEAD
     rospy.Subscriber('/ublox_gps/fix', NavSatFix, map, queue_size=1)
     rospy.Subscriber('/ublox_gps/fix', NavSatFix, gps_callback)
+=======
+    rospy.Subscriber('/gps', GPSMessage, map, queue_size=1)
+    rospy.Subscriber('/gps', GPSMessage, gps_callback)
+>>>>>>> 05b0e2308aa5d2690e10ab0290034a751c298844
     rospy.spin()
     if os.path.exists(csv_name):
         print("csv파일이 저장되었습니다.")

@@ -1,0 +1,8 @@
+prefix=/home/yeon/SSC/devel
+
+Name: dwa_planner
+Description: Description of dwa_planner
+Version: 0.0.0
+Cflags: -I/home/yeon/SSC/src/dwa_planner/include
+Libs: -L${prefix}/lib -ldwa_planner_lib
+Requires: 

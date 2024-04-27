@@ -1,0 +1,2 @@
+control:conversion:dwa_planner:gps:hunter_msgs:mapviz/mapviz:mapviz/mapviz_plugins:mapviz/multires_image:mapviz/tile_map:morai_msgs:pointcloud_to_laserscan:ssc_description
+-DCATKIN_DEVEL_PREFIX=/home/yeon/SSC/devel -DCMAKE_INSTALL_PREFIX=/home/yeon/SSC/install -G Unix Makefiles
